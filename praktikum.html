@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Praktikum - Laboratorium Informatika</title>
+  <!-- Bootstrap CSS -->
+  <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="FontAwesome/css/fontawesome.css">
+  <link rel="stylesheet" href="FontAwesome/css/brands.css">
+  <link rel="stylesheet" href="FontAwesome/css/solid.css">
+  <style>
+    body {
+      position: relative;
+    }
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1020;
+    }
+    .navbar {
+      transition: all 0.3s ease-in-out;
+    }
+
+    .navbar.shrink {
+      padding: 0.5rem 1rem;
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    /* Efek hover pada link */
+    .nav-link {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: -100%;
+      width: 100%;
+      height: 2px;
+      background-color: #fbf8f8;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover::before {
+      left: 0;
+    }
+    .instagram-icon {
+      font-size: 20px; /* Ukuran ikon */
+      color: #000000; /* Warna Instagram */
+      text-decoration: none;
+      transition: transform 0.2s ease-in-out;
+    }
+    .instagram-icon:hover {
+      transform: scale(1.2); /* Efek zoom saat hover */
+      color: #5a5f68; /* Warna saat di-hover */
+    }
+    .email-icon {
+      font-size: 20px; /* Ukuran ikon */
+      color: #000000; /* Warna Instagram */
+      text-decoration: none;
+      transition: transform 0.2s ease-in-out;
+    }
+    .email-icon:hover {
+      transform: scale(1.2); /* Efek zoom saat hover */
+      color: #5a5f68; /* Warna saat di-hover */
+    }
+    /* Animasi Loading */
+    #loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .logo-container {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: conic-gradient(#090cc6 0%, #aba5a5 0%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: rotate 1s linear infinite;
+      }
+
+      .logo-container img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        z-index: 2;
+      }
+
+      .percentage {
+        font-size: 24px;
+        margin-top: 20px;
+        color: #333;
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes fadeOut {
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+  </style>
+</head>
+<body>
+
+<!-- Animasi Loading -->
+<div id="loader">
+  <div class="logo-container" id="circle">
+    <img src="img/Logo IF.jpg" alt="Logo">
+  </div>
+  <div class="percentage" id="loading-percentage">0%</div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const loader = document.getElementById("loader");
+    const percentage = document.getElementById("loading-percentage");
+    const circle = document.getElementById("circle");
+
+    let load = 0;
+
+    const interval = setInterval(() => {
+      load++;
+      percentage.textContent = `${load}%`;
+      circle.style.background = `conic-gradient(#4CAF50 ${load}%, #ccc ${load}%)`;
+
+      if (load >= 100) {
+        clearInterval(interval);
+        loader.style.animation = "fadeOut 1s ease-in-out forwards";
+
+        setTimeout(() => {
+          loader.style.display = "none";
+        }, 1000);
+      }
+    }, 30);
+  });
+</script>  
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#"> 
+            <img src="img/Logo IF.jpg" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
+        </a>
+      <a class="navbar-brand" href="index.html">Laboratorium Informatika</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="tentang.html"><i class="fa-solid fa-user"></i> Tentang</a></li>
+          <li class="nav-item"><a class="nav-link active" href="news.html"><i class="fa-solid fa-newspaper"></i> Berita</a></li>
+          <li class="nav-item"><a class="nav-link active" href="praktikum.html"><i class="fas fa-desktop praktikum-icon"></i> Praktikum</a></li>
+          <li class="nav-item"><a class="nav-link active" href="hubungi.html"><i class="fa-solid fa-phone"></i> Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+ <h1 class="text-center mt-3">PRAKTIKUM</h1>
+  <div class="container mt-5">
+  
+<script>
+  // Fungsi Toggle Dropdown
+  function showDropdown(dropdownId) {
+    var dropdown = document.getElementById(dropdownId);
+    if (dropdown.style.display === "block") {
+      dropdown.style.display = "none";
+    } else {
+      // Menutup dropdown lain
+      var allDropdowns = document.getElementsByClassName("dropdown-content");
+      for (var i = 0; i < allDropdowns.length; i++) {
+        allDropdowns[i].style.display = "none";
+      }
+      // Membuka dropdown yang diklik
+      dropdown.style.display = "block";
+    }
+  }
+</script>
+
+<div class="card">
+<div class="card-header">
+<h3>Algoritma dan Pemrograman</h3>
+<p>Praktikum Algoritma Pemrograman adalah pembelajaran dasar logika pemrograman dan algoritma untuk memecahkan masalah 
+  melalui kode. Mahasiswa belajar struktur data, kontrol alur, dan pemrograman modular untuk membangun keterampilan 
+  analitis dalam penyusunan program yang efisien.</p>
+<!-- Dropdown Button -->
+<div class="dropdown">
+  <button onclick="showDropdown('dropdown1')" class="dropbtn"><i class="fa-solid fa-caret-down"></i> Klik</button>
+    <div id="dropdown1" class="dropdown-content" style="display: none;">
+      <p>
+        Modul Algoritma dan Pemrograman 1 
+        <a href="https://drive.google.com/file/d/1ZOuJy6mJGyypiZl5_nmOyjroPEGAGv7T/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+        <a href="https://drive.google.com/file/d/1ZOuJy6mJGyypiZl5_nmOyjroPEGAGv7T/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+      </p>
+        Modul Algoritma dan Pemrograman 2 
+        <a href="https://drive.google.com/file/d/1j0sJkWwU0zCPJQBNUOqAmDI8c_ggs_qQ/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+        <a href="https://drive.google.com/file/d/1j0sJkWwU0zCPJQBNUOqAmDI8c_ggs_qQ/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+      </p>
+      <p>
+        Modul Algoritma dan Pemrograman 3 
+        <a href="https://drive.google.com/file/d/1rI2Ow3lb3AnQc41UifcEG_nZBN4kVhhd/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+        <a href="https://drive.google.com/file/d/1rI2Ow3lb3AnQc41UifcEG_nZBN4kVhhd/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+      </p>
+      <p>
+        Modul Algoritma dan Pemrograman 4 
+        <a href="https://drive.google.com/file/d/1z7RQnbgwCiBRWNqqbY1_-R29M4TJEV87/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+        <a href="https://drive.google.com/file/d/1z7RQnbgwCiBRWNqqbY1_-R29M4TJEV87/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+      </p>
+      <p>
+        Modul Algoritma dan Pemrograman 5 
+        <a href="https://drive.google.com/file/d/1IvxNB0aEhxPfA7syCYopVRfjTCtFiOiV/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+        <a href="https://drive.google.com/file/d/1IvxNB0aEhxPfA7syCYopVRfjTCtFiOiV/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+      </p>
+      <p>
+        Modul Algoritma dan Pemrograman 6 
+        <a href="https://drive.google.com/file/d/1NxLr_yoW8rXrpgyQ01yYI236mqpDHVyS/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+        <a href="https://drive.google.com/file/d/1NxLr_yoW8rXrpgyQ01yYI236mqpDHVyS/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+      </p>
+      <p>
+        Modul Algoritma dan Pemrograman 7 
+        <a href="https://drive.google.com/file/d/16br2pZVv-QpejuBqs9kNvLa0879FVg88/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+        <a href="https://drive.google.com/file/d/16br2pZVv-QpejuBqs9kNvLa0879FVg88/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+      </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mt-3">
+  <div class="card-header">
+  <h3>Struktur Data</h3>
+  <p>Mempelajari cara mengelola dan mengatur data dalam bentuk yang efisien, seperti list, stack, queue, tree, 
+    dan graph, serta implementasinya dalam algoritma.</p>
+  <!-- Dropdown Button -->
+  <div class="dropdown2">
+    <button onclick="showDropdown('dropdown2')" class="dropbtn"><i class="fa-solid fa-caret-down"></i> Klik</button>
+    <div id="dropdown2" class="dropdown-content" style="display: none;">
+        <p>
+          Modul Struktur Data 1 
+          <a href="https://drive.google.com/file/d/1dgh7M8ONgMzw7rcjH7oo0SeCUI-9UFkG/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+          <a href="https://drive.google.com/file/d/1dgh7M8ONgMzw7rcjH7oo0SeCUI-9UFkG/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+        </p>
+          Modul Struktur Data 2 
+          <a href="https://drive.google.com/file/d/1kowA1jBrnobBAKs7zQ2qmw9vGEdG79Sr/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+          <a href="https://drive.google.com/file/d/1kowA1jBrnobBAKs7zQ2qmw9vGEdG79Sr/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+        </p>
+          Modul Struktur Data 3 
+            <a href="https://drive.google.com/file/d/1v5an3Kem990y-LsQCjnyu8y9XDlqW9Jf/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+            <a href="https://drive.google.com/file/d/1v5an3Kem990y-LsQCjnyu8y9XDlqW9Jf/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+          </p>
+          Modul Struktur Data 4 
+            <a href="https://drive.google.com/file/d/1fGBrr1w432osqrYN-w7WCocRMRs37_3n/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+            <a href="https://drive.google.com/file/d/1fGBrr1w432osqrYN-w7WCocRMRs37_3n/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+          </p>
+          Modul Struktur Data 5 
+            <a href="https://drive.google.com/file/d/1Ur8k4OrEtXyTENhQB_zQhh47gn2GUyn7/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+            <a href="https://drive.google.com/file/d/1Ur8k4OrEtXyTENhQB_zQhh47gn2GUyn7/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+          </p>
+          Modul Struktur Data 6 
+            <a href="https://drive.google.com/file/d/1U04Ouro1jOMI844lfaMQj4p3WIhzalu0/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+            <a href="https://drive.google.com/file/d/1U04Ouro1jOMI844lfaMQj4p3WIhzalu0/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+          </p>
+          Modul Struktur Data 7 
+            <a href="https://drive.google.com/file/d/1WdmNWpqyVU6B2cJ4xoozrq2q_NVV1Ifi/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+            <a href="https://drive.google.com/file/d/1WdmNWpqyVU6B2cJ4xoozrq2q_NVV1Ifi/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+          </p>
+          Modul Struktur Data 8 
+            <a href="https://drive.google.com/file/d/1B5GHSXl57c3WpO1jKxKjXHrIWwHDaQ_1/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+            <a href="https://drive.google.com/file/d/1B5GHSXl57c3WpO1jKxKjXHrIWwHDaQ_1/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+          </p>
+          Modul Struktur Data 9 
+            <a href="https://drive.google.com/file/d/1D_Ec1QWeZVMjbT-V9uf4i-y3DTphhGej/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+            <a href="https://drive.google.com/file/d/1D_Ec1QWeZVMjbT-V9uf4i-y3DTphhGej/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-3">
+    <div class="card-header">
+    <h3>Basis Data</h3>
+    <p>Memahami konsep dan implementasi sistem manajemen basis data, termasuk pemodelan data, penggunaan SQL, dan optimasi query.</p>
+    <!-- Dropdown Button -->
+    <div class="dropdown3">
+      <button onclick="showDropdown('dropdown3')" class="dropbtn"><i class="fa-solid fa-caret-down"></i> Klik</button>
+      <div id="dropdown3" class="dropdown-content" style="display: none;">
+          <p>
+            Modul Basis Data 1 
+            <a href="https://drive.google.com/file/d/1CBXujeH4Ryc_blbk6MbFTnbQlGHYNiU0/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+            <a href="https://drive.google.com/file/d/1CBXujeH4Ryc_blbk6MbFTnbQlGHYNiU0/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+          </p>
+            Modul Basis Data 2 
+            <a href="https://drive.google.com/file/d/1ccst5NWJGlbMfmzeIcxZaj-3SRfxVkjt/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+            <a href="https://drive.google.com/file/d/1ccst5NWJGlbMfmzeIcxZaj-3SRfxVkjt/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+          </p>
+            Modul Basis Data 3 
+              <a href="https://drive.google.com/file/d/1hkZGdXx9Xqc2FboJ8RWqxT2dvlNWW1-0/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+              <a href="https://drive.google.com/file/d/1hkZGdXx9Xqc2FboJ8RWqxT2dvlNWW1-0/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+            </p>
+            Modul Basis Data 4 
+              <a href="https://drive.google.com/file/d/1NR6gRtOMK-7OFxkt1-jpaZkflCc0yD0f/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+              <a href="https://drive.google.com/file/d/1NR6gRtOMK-7OFxkt1-jpaZkflCc0yD0f/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+            </p>
+            Modul Basis Data 5 
+              <a href="https://drive.google.com/file/d/1yN9T0k3tIzNdb-HHAdoaco-KvaWuSyuf/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+              <a href="https://drive.google.com/file/d/1yN9T0k3tIzNdb-HHAdoaco-KvaWuSyuf/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+            </p>
+            Modul Basis Data 6 
+              <a href="https://drive.google.com/file/d/1ctDjHLuzkew4YWXA9SPlohlJ0DvxHnDz/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+              <a href="https://drive.google.com/file/d/1ctDjHLuzkew4YWXA9SPlohlJ0DvxHnDz/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card mt-3">
+      <div class="card-header">
+      <h3>Jaringan Komputer</h3>
+      <p>Memahami konsep dan implementasi sistem manajemen basis data, termasuk pemodelan data, penggunaan SQL, dan optimasi query.</p>
+      <!-- Dropdown Button -->
+      <div class="dropdown4">
+        <button onclick="showDropdown('dropdown4')" class="dropbtn"><i class="fa-solid fa-caret-down"></i> Klik</button>
+        <div id="dropdown4" class="dropdown-content" style="display: none;">
+            <p>
+              Modul Jaringan Komputer 1 
+              <a href="https://drive.google.com/file/d/1WzQPse9HN6xCW3EVSDOTt-wNyuHQZfu0/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+              <a href="https://drive.google.com/file/d/1WzQPse9HN6xCW3EVSDOTt-wNyuHQZfu0/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+            </p>
+            <p>
+              Modul Jaringan Komputer 2 
+              <a href="https://drive.google.com/file/d/1faO1RwHVVMQbyvP8ddoujqX2UezlI2bm/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+              <a href="https://drive.google.com/file/d/1faO1RwHVVMQbyvP8ddoujqX2UezlI2bm/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+            </p>
+            <p>
+              Modul Jaringan Komputer 3 
+              <a href="https://drive.google.com/file/d/1E0pj1dKAgjUdya0apjnSmaE0vQRMXNhq/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+              <a href="https://drive.google.com/file/d/1E0pj1dKAgjUdya0apjnSmaE0vQRMXNhq/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+            </p>
+            <p>
+              Modul Jaringan Komputer 4 
+              <a href="https://drive.google.com/file/d/18uxGM5nAcbd0EhHYBSQ9FjcA3AOQrj6O/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+              <a href="hhttps://drive.google.com/file/d/18uxGM5nAcbd0EhHYBSQ9FjcA3AOQrj6O/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+            </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <div class="card-header">
+        <h3>Pemograman Berorientasi Objek</h3>
+        <p>Mengembangkan keterampilan dalam pemrograman menggunakan konsep objek, seperti enkapsulasi, pewarisan, 
+          dan polimorfisme dalam bahasa seperti Java atau C++.</p>
+        <!-- Dropdown Button -->
+        <div class="dropdown5">
+          <button onclick="showDropdown('dropdown5')" class="dropbtn"><i class="fa-solid fa-caret-down"></i> Klik</button>
+          <div id="dropdown5" class="dropdown-content" style="display: none;">
+              <p>
+                Modul Pemograman Berorientasi Objek 1 
+                <a href="https://drive.google.com/file/d/1ZuYVe4u5yaf-CglzgtOy7lrCx0x8c6an/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                <a href="https://drive.google.com/file/d/1ZuYVe4u5yaf-CglzgtOy7lrCx0x8c6an/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+              </p>
+              <p>
+                Modul Pemograman Berorientasi Objek 2 
+                <a href="https://drive.google.com/file/d/1qHak23Pc95xx5hb1CjBRh_EDxGI2-8fT/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                <a href="https://drive.google.com/file/d/1qHak23Pc95xx5hb1CjBRh_EDxGI2-8fT/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+              </p>
+              <p>
+                Modul Pemograman Berorientasi Objek 3 
+                <a href="Modul/MODUL PRAKTIKUM PBO 1-5.pdf" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                <a href="Modul/MODUL PRAKTIKUM PBO 1-5.pdf" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+              </p>
+              <p>
+                Modul Pemograman Berorientasi Objek 4 
+                <a href="Modul/MODUL PRAKTIKUM PBO 1-5.pdf" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                <a href="Modul/MODUL PRAKTIKUM PBO 1-5.pdf" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+              </p>
+              <p>
+                Modul Pemograman Berorientasi Objek 5 
+                <a href="Modul/MODUL PRAKTIKUM PBO 1-5.pdf" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                <a href="Modul/MODUL PRAKTIKUM PBO 1-5.pdf" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+              </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mt-3">
+          <div class="card-header">
+          <h3>Sistem Operasi</h3>
+          <p>Mempelajari cara kerja sistem operasi dalam mengelola hardware dan software, seperti manajemen memori, proses, dan sistem file.</p>
+          <!-- Dropdown Button -->
+          <div class="dropdown6">
+            <button onclick="showDropdown('dropdown6')" class="dropbtn"><i class="fa-solid fa-caret-down"></i> Klik</button>
+            <div id="dropdown6" class="dropdown-content" style="display: none;">
+                <p>
+                  Modul Sistem Operasi 1 
+                  <a href="https://drive.google.com/file/d/1F3Qd6r3zbKcbFnkcN8nM9F5u79EdGAbZ/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                  <a href="https://drive.google.com/file/d/1F3Qd6r3zbKcbFnkcN8nM9F5u79EdGAbZ/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                </p>
+                <p>
+                  Modul Sistem Operasi 2 
+                  <a href="https://drive.google.com/file/d/1aqIq12hFLP_Yn840lbLV-6SZCvG4IX97/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                  <a href="https://drive.google.com/file/d/1aqIq12hFLP_Yn840lbLV-6SZCvG4IX97/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                </p>
+                <p>
+                  Modul Sistem Operasi 3 
+                  <a href="https://drive.google.com/file/d/1aqIq12hFLP_Yn840lbLV-6SZCvG4IX97/view?usp=sharing" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                  <a href="https://drive.google.com/file/d/1aqIq12hFLP_Yn840lbLV-6SZCvG4IX97/view?usp=sharing" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                </p>
+                <p>
+                  Modul Sistem Operasi 4 
+                  <a href="Modul/Sistem Operasi/Pertemuan 6 Sistem Operasi.pdf" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                  <a href="Modul/Sistem Operasi/Pertemuan 6 Sistem Operasi.pdf" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                </p>
+                <p>
+                  Modul Sistem Operasi 5 
+                  <a href="Modul/Sistem Operasi/Pertemuan 7 Sistem Operasi.pdf" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                  <a href="Modul/Sistem Operasi/Pertemuan 7 Sistem Operasi.pdf" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                </p>
+                <p>
+                  Modul Sistem Operasi 6 
+                  <a href="Modul/Sistem Operasi/Praktikum Pertemuan 8 Sistem Operasi.pdf" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                  <a href="Modul/Sistem Operasi/Praktikum Pertemuan 8 Sistem Operasi.pdf" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                </p>
+                <p>
+                  Modul Sistem Operasi 7 
+                  <a href="Modul/Sistem Operasi/Praktikum Pertemuan 9 Sistem Operasi.pdf" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                  <a href="Modul/Sistem Operasi/Praktikum Pertemuan 9 Sistem Operasi.pdf" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mt-3">
+            <div class="card-header">
+            <h3>Pembelajaran Mesin</h3>
+            <p>Pengenalan pada algoritma pembelajaran mesin untuk membangun model yang mampu melakukan prediksi dan analisis data secara otomatis.</p>
+            <!-- Dropdown Button -->
+            <div class="dropdown7">
+              <button onclick="showDropdown('dropdown7')" class="dropbtn"><i class="fa-solid fa-caret-down"></i> Klik</button>
+              <div id="dropdown7" class="dropdown-content" style="display: none;">
+                  <p>
+                    Modul Pembelajaran Mesin 1 
+                    <a href="https://drive.google.com/drive/folders/1ssP0kFvlVapW2MsYpbzR6N9LPJMnosNC?usp=drive_link" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                    <a href="https://drive.google.com/drive/folders/1ssP0kFvlVapW2MsYpbzR6N9LPJMnosNC?usp=drive_link" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                  </p>
+                  <p>
+                    Modul Pembelajaran Mesin 2 
+                    <a href="https://drive.google.com/drive/folders/1ssP0kFvlVapW2MsYpbzR6N9LPJMnosNC?usp=drive_link" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                    <a href="https://drive.google.com/drive/folders/1ssP0kFvlVapW2MsYpbzR6N9LPJMnosNC?usp=drive_link" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                  </p>
+                  <p>
+                    Modul Pembelajaran Mesin 3 
+                    <a href="https://drive.google.com/drive/folders/1ssP0kFvlVapW2MsYpbzR6N9LPJMnosNC?usp=drive_link" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                    <a href="hhttps://drive.google.com/drive/folders/1ssP0kFvlVapW2MsYpbzR6N9LPJMnosNC?usp=drive_link" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                  </p>
+                  <p>
+                    Modul Pembelajaran Mesin 4 
+                    <a href="https://drive.google.com/drive/folders/1ssP0kFvlVapW2MsYpbzR6N9LPJMnosNC?usp=drive_link" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                    <a href="https://drive.google.com/drive/folders/1ssP0kFvlVapW2MsYpbzR6N9LPJMnosNC?usp=drive_link" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                  </p>
+                  <p>
+                    Modul Pembelajaran Mesin 5 
+                    <a href="https://drive.google.com/drive/folders/1ssP0kFvlVapW2MsYpbzR6N9LPJMnosNC?usp=drive_link" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                    <a href="https://drive.google.com/drive/folders/1ssP0kFvlVapW2MsYpbzR6N9LPJMnosNC?usp=drive_link" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                  </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mt-3">
+              <div class="card-header">
+              <h3>Pemrograman Web</h3>
+              <p>Membuat aplikasi web dengan memanfaatkan HTML, CSS, JavaScript, serta framework backend dan frontend untuk pengembangan yang dinamis dan responsif.</p>
+              <!-- Dropdown Button -->
+              <div class="dropdown8">
+                <button onclick="showDropdown('dropdown8')" class="dropbtn"><i class="fa-solid fa-caret-down"></i> Klik</button>
+                <div id="dropdown8" class="dropdown-content" style="display: none;">
+                    <p>
+                      Modul Pemrograman Web 1 
+                      <a href="https://drive.google.com/drive/folders/183E3m-3eC8EA-beErw8DwHl0m3tyH0Dt?usp=drive_link" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                      <a href="https://drive.google.com/drive/folders/183E3m-3eC8EA-beErw8DwHl0m3tyH0Dt?usp=drive_link" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                    </p>
+                    <p>
+                      Modul Pemrograman Web 2 
+                      <a href="https://drive.google.com/drive/folders/183E3m-3eC8EA-beErw8DwHl0m3tyH0Dt?usp=drive_link" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                      <a href="https://drive.google.com/drive/folders/183E3m-3eC8EA-beErw8DwHl0m3tyH0Dt?usp=drive_link" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                    </p><p>
+                      Modul Pemrograman Web 3 
+                      <a href="https://drive.google.com/drive/folders/183E3m-3eC8EA-beErw8DwHl0m3tyH0Dt?usp=drive_link" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                      <a href="https://drive.google.com/drive/folders/183E3m-3eC8EA-beErw8DwHl0m3tyH0Dt?usp=drive_link" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                    </p><p>
+                      Modul Pemrograman Web 4 
+                      <a href="https://drive.google.com/drive/folders/183E3m-3eC8EA-beErw8DwHl0m3tyH0Dt?usp=drive_link" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                      <a href="https://drive.google.com/drive/folders/183E3m-3eC8EA-beErw8DwHl0m3tyH0Dt?usp=drive_link" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                    </p><p>
+                      Modul Pemrograman Web 5 
+                      <a href="https://drive.google.com/drive/folders/183E3m-3eC8EA-beErw8DwHl0m3tyH0Dt?usp=drive_link" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                      <a href="https://drive.google.com/drive/folders/183E3m-3eC8EA-beErw8DwHl0m3tyH0Dt?usp=drive_link" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                    </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card mt-3">
+                <div class="card-header">
+                <h3>Deep Learning</h3>
+                <p>Menggunakan jaringan saraf dalam untuk memecahkan masalah kompleks, seperti pengenalan gambar atau pemrosesan bahasa alami.</p>
+                <!-- Dropdown Button -->
+                <div class="dropdown9">
+                  <button onclick="showDropdown('dropdown9')" class="dropbtn"><i class="fa-solid fa-caret-down"></i> Klik</button>
+                  <div id="dropdown9" class="dropdown-content" style="display: none;">
+                      <p>
+                        Modul Deep Learning 1 
+                        <a href="" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                        <a href="" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                      </p>
+                      <p>
+                        Modul Deep Learning 2 
+                        <a href="" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                        <a href="" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                      </p>
+                      <p>
+                        Modul Deep Learning 3 
+                        <a href="" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                        <a href="" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                      </p>
+                      <p>
+                        Modul Deep Learning 4 
+                        <a href="" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                        <a href="" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                      </p>
+                      <p>
+                        Modul Deep Learning 5 
+                        <a href="" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                        <a href="" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                      </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card mt-3">
+                  <div class="card-header">
+                  <h3>Big Data</h3>
+                  <p>Mengelola dan menganalisis data dalam jumlah besar menggunakan alat dan teknik seperti Hadoop dan 
+                    Spark untuk mengambil wawasan yang bermakna.</p>
+                  <!-- Dropdown Button -->
+                  <div class="dropdown10">
+                    <button onclick="showDropdown('dropdown10')" class="dropbtn"><i class="fa-solid fa-caret-down"></i> Klik</button>
+                    <div id="dropdown10" class="dropdown-content" style="display: none;">
+                        <p>
+                          Modul Big Data 1 
+                          <a href="" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                          <a href="" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                        </p>
+                        <p>
+                          Modul Big Data 2 
+                          <a href="" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                          <a href="" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                        </p>
+                        <p>
+                          Modul Big Data 3 
+                          <a href="" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                          <a href="" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                        </p>
+                        <p>
+                          Modul Big Data 4 
+                          <a href="" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                          <a href="" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                        </p>
+                        <p>
+                          Modul Big Data 5 
+                          <a href="" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                          <a href="" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                        </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card mt-3">
+                    <div class="card-header">
+                    <h3>Aplikasi Mobile</h3>
+                    <p>Mengembangkan aplikasi mobile untuk platform Android atau iOS, mencakup desain UI/UX dan 
+                      pemrograman menggunakan framework seperti Flutter atau Android Studio.</p>
+                    <!-- Dropdown Button -->
+                    <div class="dropdown11">
+                      <button onclick="showDropdown('dropdown11')" class="dropbtn"><i class="fa-solid fa-caret-down"></i> Klik</button>
+                      <div id="dropdown11" class="dropdown-content" style="display: none;">
+                          <p>
+                            Modul Aplikasi Mobile 1 
+                            <a href="" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                            <a href="" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                          </p>
+                          <p>
+                            Modul Aplikasi Mobile 2 
+                            <a href="" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                            <a href="" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                          </p>
+                          <p>
+                            Modul Aplikasi Mobile 3 
+                            <a href="" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                            <a href="" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                          </p>
+                          <p>
+                            Modul Aplikasi Mobile 4 
+                            <a href="" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                            <a href="" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                          </p>
+                          <p>
+                            Modul Aplikasi Mobile 5 
+                            <a href="" onclick="showNotification()" title="Open PDF"><i class="fas fa-folder-open"></i></a> 
+                            <a href="" onclick="showNotification()" title="Download PDF"><i class="fas fa-download"></i></a>
+                          </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+  <div class="container mt-4">
+      <h2 class="text-center mb-4">Contact</h2>
+    <div class="text-center">
+      <p><strong>Hubungi Kami:</strong></p>
+      <p><strong><i class="fa-solid fa-phone"></i> +62 853-5697-1937</strong></p>
+      <a href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSMTSDvJXCBsJGJkXXwWkvGJTCqqXXWsxMGfrjmgTgCFVtgsMcpvmTwSVdPfkWzvKVxfxjnF" 
+        target="_blank" class="email-icon" title="Kirim Email"><strong><i class="fa-solid fa-envelope" ></i> labifunand@gmail.com</strong></a>
+      <a href="https://www.instagram.com/informatika_unand?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+        target="_blank" class="instagram-icon" title="Buka Instagram"><strong><i class="fab fa-instagram"></i> @informatika_unand</strong></a>
+    </div>
+  </div>
+
+  <div class="container mt-4"> 
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.3091786493706!2d100.4584783734983!3d-0.9153454353301367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2fd4b7963e1ea631%3A0x452d09b61f76d6ec!2sFakultas%20Teknologi%20InformasiUniversitas%20Andalas!5e0!3m2!1sid!2sid!4v1730162754693!5m2!1sid!2sid" 
+    width="100%" height="200" style="border:0;" 
+    allowfullscreen="" 
+    loading="lazy" 
+    referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</div>
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3 mt-5">
+    <p>© 2024 Laboratorium Informatika. Semua Hak Dilindungi.</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</body>
+</html>

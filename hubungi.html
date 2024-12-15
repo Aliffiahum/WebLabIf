@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hubungi Kami - Laboratorium Informatika</title>
+  <!-- Bootstrap CSS -->
+  <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="FontAwesome/css/fontawesome.css">
+    <link rel="stylesheet" href="FontAwesome/css/brands.css">
+    <link rel="stylesheet" href="FontAwesome/css/solid.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+      body {
+        position: relative;
+      }
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+      }
+      .navbar {
+        transition: all 0.3s ease-in-out;
+      }
+  
+      .navbar.shrink {
+        padding: 0.5rem 1rem;
+        background-color: rgba(0, 0, 0, 0.9);
+      }
+  
+      /* Efek hover pada link */
+      .nav-link {
+        position: relative;
+        overflow: hidden;
+      }
+  
+      .nav-link::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: -100%;
+        width: 100%;
+        height: 2px;
+        background-color: #fbf8f8;
+        transition: all 0.3s ease;
+      }
+  
+      .nav-link:hover::before {
+        left: 0;
+      }
+      button {
+            background-color: #04AA6D;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+      .instagram-icon {
+      font-size: 20px; /* Ukuran ikon */
+      color: #000000; /* Warna Instagram */
+      text-decoration: none;
+      transition: transform 0.2s ease-in-out;
+    }
+    .instagram-icon:hover {
+      transform: scale(1.2); /* Efek zoom saat hover */
+      color: #5a5f68; /* Warna saat di-hover */
+    }
+    .email-icon {
+      font-size: 20px; /* Ukuran ikon */
+      color: #000000; /* Warna Instagram */
+      text-decoration: none;
+      transition: transform 0.2s ease-in-out;
+    }
+    .email-icon:hover {
+      transform: scale(1.2); /* Efek zoom saat hover */
+      color: #5a5f68; /* Warna saat di-hover */
+    }
+    /* Animasi Loading */
+    #loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .logo-container {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: conic-gradient(#090cc6 0%, #aba5a5 0%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: rotate 1s linear infinite;
+      }
+
+      .logo-container img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        z-index: 2;
+      }
+
+      .percentage {
+        font-size: 24px;
+        margin-top: 20px;
+        color: #333;
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes fadeOut {
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+    </style>
+    <script>
+      function sendMessage(event) {
+          event.preventDefault(); // Mencegah form dari reload
+  
+          // Ambil nilai input
+          var name = document.getElementById("nama").value;
+          var email = document.getElementById("email").value;
+          var message = document.getElementById("pesan").value;
+  
+          var successMessage = document.getElementById("successMessage");
+          var errorMessage = document.getElementById("errorMessage");
+  
+          // Validasi input sederhana
+          if (name === "" || email === "" || message === "") {
+              errorMessage.style.display = "block";
+              successMessage.style.display = "none";
+              errorMessage.innerText = "Harap isi semua bidang!";
+          } else {
+              successMessage.style.display = "block";
+              errorMessage.style.display = "none";
+              successMessage.innerText = "Pesan Anda telah berhasil dikirim!";
+              
+              // Kosongkan form setelah submit
+              document.getElementById("contactForm").reset();
+          }
+      }
+  </script>
+
+  </head>
+<body>
+  <!-- Animasi Loading -->
+<div id="loader">
+  <div class="logo-container" id="circle">
+    <img src="img/Logo IF.jpg" alt="Logo">
+  </div>
+  <div class="percentage" id="loading-percentage">0%</div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const loader = document.getElementById("loader");
+    const percentage = document.getElementById("loading-percentage");
+    const circle = document.getElementById("circle");
+
+    let load = 0;
+
+    const interval = setInterval(() => {
+      load++;
+      percentage.textContent = `${load}%`;
+      circle.style.background = `conic-gradient(#4CAF50 ${load}%, #ccc ${load}%)`;
+
+      if (load >= 100) {
+        clearInterval(interval);
+        loader.style.animation = "fadeOut 1s ease-in-out forwards";
+
+        setTimeout(() => {
+          loader.style.display = "none";
+        }, 1000);
+      }
+    }, 30);
+  });
+</script>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#"> 
+            <img src="img/Logo IF.jpg" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
+        </a>
+      <a class="navbar-brand" href="index.html">Laboratorium Informatika</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="tentang.html"><i class="fa-solid fa-user"></i> Tentang</a></li>
+          <li class="nav-item"><a class="nav-link active" href="news.html"><i class="fa-solid fa-newspaper"></i> Berita</a></li>
+          <li class="nav-item"><a class="nav-link active" href="praktikum.html"><i class="fas fa-desktop praktikum-icon"></i> Praktikum</a></li>
+          <li class="nav-item"><a class="nav-link active" href="hubungi.html"><i class="fa-solid fa-phone"></i> Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hubungi Kami Content -->
+  <div class="container mt-5">
+    <h1 class="text-center">Contact Us</h1>
+    <form class="mt-4">
+      <div class="mb-3">
+        <label for="nama" class="form-label"><strong>Nama</strong></label>
+        <input type="text" class="form-control" id="userInput" placeholder="Nama Anda">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label"><strong>Email</strong></label>
+        <input type="email" class="form-control" id="email" placeholder="Email Anda">
+      </div>
+      <div class="mb-3">
+        <label for="pesan" class="form-label"><strong>Pesan</strong></label>
+        <textarea class="form-control" id="pesan" rows="5" placeholder="Tulis pesan Anda"></textarea>
+      </div>
+      <button onclick="sendMessage()">Kirim</button>
+    </form>
+    <div id="successMessage" class="message success"></div>
+    <div id="errorMessage" class="message error"></div>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Contact</h2>
+  <div class="text-center">
+  <p><strong>Hubungi Kami:</strong></p>
+  <p><strong><i class="fa-solid fa-phone"></i> +62 853-5697-1937</strong></p>
+  <a href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSMTSDvJXCBsJGJkXXwWkvGJTCqqXXWsxMGfrjmgTgCFVtgsMcpvmTwSVdPfkWzvKVxfxjnF" 
+    target="_blank" class="email-icon" title="Kirim Email"><strong><i class="fa-solid fa-envelope" ></i> labifunand@gmail.com</strong></a>
+  <a href="https://www.instagram.com/informatika_unand?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+    target="_blank" class="instagram-icon" title="Buka Instagram"><strong><i class="fab fa-instagram"></i> @informatika_unand</strong></a>
+  </div>
+</div>
+  
+  <div class="container mt-4"> 
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.3091786493706!2d100.4584783734983!3d-0.9153454353301367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2fd4b7963e1ea631%3A0x452d09b61f76d6ec!2sFakultas%20Teknologi%20InformasiUniversitas%20Andalas!5e0!3m2!1sid!2sid!4v1730162754693!5m2!1sid!2sid" 
+    width="100%" height="200" style="border:0;" 
+    allowfullscreen="" 
+    loading="lazy" 
+    referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3 mt-5">
+    <p>© 2024 Laboratorium Informatika. Semua Hak Dilindungi.</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</body>
+</html>
